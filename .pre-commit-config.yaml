@@ -1,0 +1,26 @@
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+  - id: check-yaml
+  - id: check-case-conflict
+  - id: check-symlinks
+  - id: fix-byte-order-marker
+  - id: no-commit-to-branch
+    args: [--branch, main]
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+    args: [--markdown-linebreak-ext=md]
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.17.0
+  hooks:
+    - id: gitleaks
+- repo: https://github.com/commitizen-tools/commitizen
+  rev: 3.5.3
+  hooks:
+    - id: commitizen
+      stages:
+      - commit-msg
