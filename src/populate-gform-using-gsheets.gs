@@ -3,18 +3,18 @@
  * from values in Google Spreadsheet
  * inspired by Amit Agarwal (https://www.labnol.org/code/google-forms-choices-from-sheets-200630)
  *
- * for the script to work there must be a column named 'FormID' and has a value of Google Form ID(s) as its row 
+ * for the script to work there must be a column named 'FormID' and has a value of Google Form ID(s) as its row
  * within the same sheet as the data and then execute the script from the sheet containing the data
  **/
-function populateOptions() {
+const populateGoogleForms = () => {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const [header, ...data] = SpreadsheetApp.getActiveSheet().getDataRange().getDisplayValues();
 
   let options = {};
   header.forEach((title, i) => {
     if ('' !== title) {
-      options[title] = data.map(d => d[i]).filter(e => e);
-    }  
+      options[title] = [...new Set(data.map(d => d[i]).filter(e => e))];
+    }
   });
 
   const FORMS_ID = options['FormID'];
@@ -49,6 +49,6 @@ function populateOptions() {
       ss.toast('Failed to update Form with ID ' + id)
     }
   });
-  
+
   ss.toast('Google Form(s) Updated');
 };
