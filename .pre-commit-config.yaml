@@ -1,3 +1,4 @@
+---
 default_install_hook_types:
   - pre-commit
   - commit-msg
@@ -34,4 +35,7 @@ repos:
         types: [file]
         additional_dependencies:
           - eslint@latest
+          - eslint-plugin-import@latest
+          - eslint-plugin-n@latest
+          - eslint-plugin-promise@latest
           - eslint-config-standard@latest
